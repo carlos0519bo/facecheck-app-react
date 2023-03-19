@@ -1,7 +1,10 @@
-import React from 'react'
+import { MainLayout } from "../components"
 
 export const LoginPage = () => {
   return (
-    <div>LoginPage</div>
+
+    <MainLayout>
+      <div>LoginPage</div>
+    </MainLayout>
   )
 }
