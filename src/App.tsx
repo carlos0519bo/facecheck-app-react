@@ -12,6 +12,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />}/>
             <Route path="/login" element={<LoginPage />}/>
+            <Route path="*" element={<p>Página no encontrada: 404!</p>} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

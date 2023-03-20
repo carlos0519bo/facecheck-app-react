@@ -47,19 +47,16 @@ export const TableDataList = () => {
               Nombre
             </TableCell>
             <TableCell
-              align="right"
               sx={{ fontWeight: 'bold', fontSize: '16px' }}
             >
               Fecha
             </TableCell>
             <TableCell
-              align="right"
               sx={{ fontWeight: 'bold', fontSize: '16px' }}
             >
               Hora
             </TableCell>
             <TableCell
-              align="right"
               sx={{ fontWeight: 'bold', fontSize: '16px' }}
             >
               Foto
@@ -69,12 +66,12 @@ export const TableDataList = () => {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell>
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.date}</TableCell>
-              <TableCell align="right">{row.hour}</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell align="left">{row.date}</TableCell>
+              <TableCell align="left">{row.hour}</TableCell>
+              <TableCell align="left"></TableCell>
             </TableRow>
           ))}
         </TableBody>

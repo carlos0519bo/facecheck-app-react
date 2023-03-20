@@ -1,9 +1,10 @@
-import { MainLayout, TableDataList } from '../components';
+import { MainLayout, TableDataList, AlterTable } from '../components';
 
 export const HomePage = () => {
   return (
     <MainLayout>
-        <TableDataList />
+      <TableDataList />
+      {/* <AlterTable /> */}
     </MainLayout>
   );
 };
