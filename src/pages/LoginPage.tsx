@@ -1,9 +1,16 @@
 import { Box, Typography, useMediaQuery } from '@mui/material';
 import { MainLayout } from '../components';
 import { Form } from '../components';
+import { useNavigate } from 'react-router-dom';
 
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const login = () => {
+    // localStorage.setItem('user', 'test')
+    navigate('/')
+  }
   
   const isNonMobileScreens = useMediaQuery('(min-width: 1000px)');
 
@@ -24,11 +31,11 @@ export const LoginPage = () => {
           mb={1}
           textAlign="center"
         >
-          <Typography fontWeight="600" fontSize="32px" color="primary">
+          <Typography fontWeight="700" variant='h4' color="primary">
             Inicio de sesión
           </Typography>
         </Box>
-        <Form />
+        <Form login={login}/>
       </Box>
     </MainLayout>
   );

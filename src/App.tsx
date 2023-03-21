@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { HomePage, LoginPage } from './pages';
+import { HomePage, LoginPage, NotFoundPage } from './pages';
 import { lightTheme } from './themes';
 
 function App() {
@@ -10,9 +10,17 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<HomePage />}/>
-            <Route path="/login" element={<LoginPage />}/>
-            <Route path="*" element={<p>Página no encontrada: 404!</p>} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            {/* <Route
+              path="/"
+              element={
+                <PrivateRoute>
+                  <HomePage />
+                </PrivateRoute>
+              }
+            /> */}
+            <Route path="*" element={<NotFoundPage/>} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

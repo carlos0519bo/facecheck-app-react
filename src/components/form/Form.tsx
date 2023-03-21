@@ -13,7 +13,11 @@ const CssTextField = styled(TextField)({
   },
 });
 
-export const Form = () => {
+interface Props {
+  login: () => void;
+}
+
+export const Form = ({ login }: Props) => {
   const isNonMobile = useMediaQuery('(min-width:600px)');
 
   const {
@@ -24,6 +28,7 @@ export const Form = () => {
 
   const onFormSubmit = (data: LoginProps) => {
     console.log(data);
+    login();
   };
 
   return (
@@ -43,7 +48,7 @@ export const Form = () => {
             sx={{ gridColumn: 'span 4' }}
             required
             {...register('email', {
-              required: 'Este campo es requerrido',
+              required: 'Este campo es obligatorio',
             })}
             error={!!errors.email}
             helperText={errors.email?.message}
@@ -54,7 +59,7 @@ export const Form = () => {
             sx={{ gridColumn: 'span 4' }}
             required
             {...register('password', {
-              required: 'Este campo es requerrido',
+              required: 'Este campo es obligatorio',
             })}
             error={!!errors.password}
             helperText={errors.password?.message}
