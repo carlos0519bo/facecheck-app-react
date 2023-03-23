@@ -10,9 +10,10 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { FormDialog } from '../dialog';
 import { useForm } from 'react-hook-form';
-import { LoginProps } from '../../interfaces/LoginInterface';
 import Visibility from '@mui/icons-material/Visibility';
+import { LoginProps } from '../../interfaces/LoginInterface';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const CssTextField = styled(TextField)({
@@ -32,25 +33,41 @@ interface Props {
 
 export const Form = ({ login }: Props) => {
   const [viewConfirmPassword, setViewConfirmPassword] = useState(false);
+  const [codeEntered, setCodeEntered] = useState('');
   const [pageType, setPageType] = useState('login');
+  const [open, setOpen] = useState(false);
+  const [errorCode, setErrorCode] = useState(false);
   const isLogin = pageType === 'login';
   const isRegister = pageType === 'register';
-
   const isNonMobile = useMediaQuery('(min-width:600px)');
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setErrorCode(false);
+    setCodeEntered('');
+  };
 
   const changeForm = () => {
     if (pageType === 'login') {
-      const code = window.prompt('Ingrese el código de registro');
-      if (keys_for_register.includes(code!!)) {
+      if (keys_for_register.includes(codeEntered)) {
         setPageType('register');
+        setErrorCode(false);
+        setCodeEntered('');
+        handleClose();
       } else {
         setPageType('login');
-        window.alert('Clave inválida')
+        setErrorCode(true);
+        setTimeout(() => {
+          setErrorCode(false);
+        }, 3000);
       }
     }
 
     if (pageType === 'register') setPageType('login');
-
   };
 
   const {
@@ -187,8 +204,12 @@ export const Form = ({ login }: Props) => {
         <Box textAlign="end">
           <Typography
             onClick={() => {
-              setPageType(isLogin ? 'register' : 'login');
-              changeForm();
+              // setPageType(isLogin ? 'register' : 'login');
+              if (pageType === 'login') {
+                handleClickOpen();
+              } else {
+                setPageType('login');
+              }
               reset();
             }}
             sx={{
@@ -196,6 +217,7 @@ export const Form = ({ login }: Props) => {
                 cursor: 'pointer',
               },
             }}
+            component="span"
           >
             {isLogin ? (
               <p>
@@ -208,6 +230,14 @@ export const Form = ({ login }: Props) => {
             )}
           </Typography>
         </Box>
+        <FormDialog
+          open={open}
+          handleClose={handleClose}
+          setCodeEntered={setCodeEntered}
+          codeEntered={codeEntered}
+          changeForm={changeForm}
+          errorCode={errorCode}
+        />
       </form>
     </>
   );
