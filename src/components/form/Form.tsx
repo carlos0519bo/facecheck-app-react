@@ -25,7 +25,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
-const keys_for_register = ['FC022', 'FCX22', 'FCV22'];
+const keys_for_register = ['ASDF','FC02', 'FCX22', 'FCV22'];
 
 interface Props {
   login: () => void;
