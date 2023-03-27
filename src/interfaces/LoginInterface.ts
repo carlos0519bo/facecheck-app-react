@@ -9,3 +9,8 @@ interface RegisterProps {
   lastName: string;
   repeatPassword: string;
 }
+
+
+export interface FormTypeProps {
+  formtype: 'login' | 'register'
+}

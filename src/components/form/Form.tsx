@@ -32,8 +32,9 @@ interface Props {
 }
 
 export const Form = ({ login }: Props) => {
-  const [viewConfirmPassword, setViewConfirmPassword] = useState(false);
-  const [codeEntered, setCodeEntered] = useState('');
+  const [viewPassword, setViewPassword] = useState<boolean>(false);
+  const [viewConfirmPassword, setViewConfirmPassword] = useState<boolean>(false);
+  const [codeEntered, setCodeEntered] = useState<string>('');
   const [pageType, setPageType] = useState('login');
   const [open, setOpen] = useState(false);
   const [errorCode, setErrorCode] = useState(false);
@@ -57,6 +58,7 @@ export const Form = ({ login }: Props) => {
         setPageType('register');
         setErrorCode(false);
         setCodeEntered('');
+        setViewPassword(false)
         handleClose();
       } else {
         setPageType('login');
@@ -75,12 +77,15 @@ export const Form = ({ login }: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch
   } = useForm<LoginProps>();
 
   const onFormSubmit = (data: LoginProps) => {
     console.log(data);
     // login();
   };
+
+  const password = watch('password')
 
   return (
     <>
@@ -143,14 +148,14 @@ export const Form = ({ login }: Props) => {
             })}
             error={!!errors.password}
             helperText={errors.password?.message}
-            type={viewConfirmPassword ? 'text' : 'password'}
+            type={viewPassword ? 'text' : 'password'}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
-                    onClick={() => setViewConfirmPassword(!viewConfirmPassword)}
+                    onClick={() => setViewPassword(!viewPassword)}
                   >
-                    {viewConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    {viewPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -164,6 +169,8 @@ export const Form = ({ login }: Props) => {
               required
               {...register('register.repeatPassword', {
                 required: 'Este campo es obligatorio',
+                validate: (value) =>
+                    value === password || "Las contraseñas no coinciden",
               })}
               error={!!errors.register?.repeatPassword}
               helperText={errors.register?.repeatPassword?.message}

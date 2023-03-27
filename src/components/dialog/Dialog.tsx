@@ -40,8 +40,8 @@ export const FormDialog = ({
               textAlign: 'justify',
             }}
           >
-            Para poder registrarte tienes que ingresar el código de permiso. Si
-            no dispones de un código comuníquese con dirección.
+            Para poder registrarte tienes que ingresar un código autorizado. Si
+            no dispones de un código, comuníquese con dirección.
           </DialogContentText>
           <TextField
             required
