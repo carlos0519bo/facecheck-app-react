@@ -166,6 +166,10 @@ export const Form = ({ login }: Props) => {
             <CssTextField
               label="Repita su contraseña"
               sx={{ gridColumn: 'span 4' }}
+              onPaste={(e)=>{
+                e.preventDefault()
+                return false;
+              }}
               required
               {...register('register.repeatPassword', {
                 required: 'Este campo es obligatorio',
