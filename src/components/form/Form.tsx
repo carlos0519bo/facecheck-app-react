@@ -10,7 +10,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import { FormDialog } from '../dialog';
+import { FormDialog } from '../dialogs';
 import { useForm } from 'react-hook-form';
 import Visibility from '@mui/icons-material/Visibility';
 import { LoginProps } from '../../interfaces/LoginInterface';

@@ -11,12 +11,22 @@ import {
 import { useLocation } from 'react-router-dom';
 import { THEME_COLORS } from '../../themes';
 import logo from '../../assets/logo.png';
+import { AlertDialog } from '../dialogs/Alert';
 
-const settings = ['Perfil','Cerrar Sesión'];
+const settings = ['Perfil', 'Cerrar Sesión'];
 
 export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -28,7 +38,13 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <Box>
-      <Box width="100%" bgcolor="black" p="1rem 6%" display='flex' justifyContent='space-between'>
+      <Box
+        width="100%"
+        bgcolor="black"
+        p="1rem 6%"
+        display="flex"
+        justifyContent="space-between"
+      >
         <Box display="flex" width="250px" gap={1}>
           <Box
             component="img"
@@ -74,11 +90,12 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">Perfil</Typography>
                 </MenuItem>
-              ))}
+                <MenuItem onClick={handleClickOpen}>
+                  <Typography textAlign="center">Cerrar sesión</Typography>
+                </MenuItem>
             </Menu>
           </Box>
         ) : null}
@@ -87,6 +104,10 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
       <Box p="1rem 6%" m="1rem auto" borderRadius="1.5rem">
         {children}
       </Box>
+      <AlertDialog
+        open={open}
+        handleClose={handleClose}
+      />
     </Box>
   );
 };
