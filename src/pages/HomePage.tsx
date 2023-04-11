@@ -1,10 +1,10 @@
-import { MainLayout, TableDataList, AlterTable } from '../components';
+import { MainLayout, TableDataList, Spinner } from '../components';
 
 export const HomePage = () => {
   return (
     <MainLayout>
       <TableDataList />
-      {/* <AlterTable /> */}
+      <Spinner />
     </MainLayout>
   );
 };
