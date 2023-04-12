@@ -4,7 +4,7 @@ export const HomePage = () => {
   return (
     <MainLayout>
       <TableDataList />
-      <Spinner />
+      {/* <Spinner /> */}
     </MainLayout>
   );
 };

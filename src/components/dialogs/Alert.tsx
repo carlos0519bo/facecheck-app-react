@@ -5,7 +5,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-
+import InfoIcon from '@mui/icons-material/Info';
 interface Props {
   open: boolean;
   handleClose: () => void;
@@ -20,8 +20,18 @@ export const AlertDialog = ({ handleClose, open }: Props) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"INFO"}
+        <DialogTitle id="alert-dialog-title" sx={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center'
+        }}>
+          <InfoIcon
+            sx={{
+              fontSize: 35,
+              color: 'orange',
+              textAlign: 'center'
+            }}
+          />
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -29,7 +39,7 @@ export const AlertDialog = ({ handleClose, open }: Props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Sí</Button>
+          <Button onClick={handleClose}>Aceptar</Button>
           <Button onClick={handleClose} autoFocus>
             Cancelar
           </Button>
