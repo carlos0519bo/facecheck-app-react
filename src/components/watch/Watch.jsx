@@ -1,41 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './watch.css';
+import { Typography } from '@mui/material';
 
 export const Watch = () => {
+  const date = new Date();
 
-    const date = new Date();
+  const [dataTime, setDataTime] = useState({
+    horas: date.getHours(),
+    minutos: date.getMinutes(),
+  });
 
-    const [dataTime, setDataTime] = useState({
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const date = new Date();
+      setDataTime({
         horas: date.getHours(),
-        minutos: date.getMinutes()
-    });
+        minutos: date.getMinutes(),
+      });
+    }, 1000);
 
+    return () => clearInterval(timer);
+  }, []);
 
-    useEffect(() => {
-        
-        const timer = setInterval(() => {
-            
-            const date = new Date();
-            setDataTime({
-                horas: date.getHours(),
-                minutos: date.getMinutes()
-            });
-            
-        }, 1000);
-        
-
-        return () => clearInterval(timer);
-
-    }, []);
-
-    return (
-        <>
-                <div className="contador">
-                    <p>
-                        {dataTime.horas < 10 ? ` 0${dataTime.horas}` : dataTime.horas} h : {dataTime.minutos < 10 ? ` 0${dataTime.minutos}` : dataTime.minutos} {dataTime.segundos < 10 ? ` 0${dataTime.segundos}` : dataTime.segundos} 
-                    </p>
-                </div>
-          
-        </>
-    )
-}
+  return (
+    <Typography fontSize={26} color="white">
+      {dataTime.horas < 10 ? ` 0${dataTime.horas}` : dataTime.horas} :{' '}
+      {dataTime.minutos < 10 ? ` 0${dataTime.minutos}` : dataTime.minutos}{' '}
+    </Typography>
+  );
+};

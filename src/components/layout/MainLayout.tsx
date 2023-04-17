@@ -8,19 +8,19 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { THEME_COLORS } from '../../themes';
 import logo from '../../assets/logo.png';
 import { AlertDialog } from '../dialogs/Alert';
 import { UserProfileDialog } from '../dialogs';
 import { Watch } from '../watch';
 
-
 export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
   const [openUserProfileDialog, setOpenUserProfileDialog] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -44,6 +44,10 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const signOut = () => {
+    navigate('/auth');
   };
 
   return (
@@ -76,7 +80,14 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
           </Typography>
         </Box>
 
-        <Watch />
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <Watch />
+        </Box>
 
         {pathname === '/' ? (
           <Box sx={{ flexGrow: 0 }}>
@@ -115,7 +126,7 @@ export const MainLayout: FC<PropsWithChildren> = ({ children }) => {
       <Box p="1rem 6%" m="1rem auto" borderRadius="1.5rem">
         {children}
       </Box>
-      <AlertDialog open={open} handleClose={handleClose} />
+      <AlertDialog open={open} handleClose={handleClose} signOut={signOut} />
       <UserProfileDialog
         open={openUserProfileDialog}
         handleClose={handleClosedUserProfile}

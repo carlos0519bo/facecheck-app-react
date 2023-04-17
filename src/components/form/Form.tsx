@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import Visibility from '@mui/icons-material/Visibility';
 import { LoginProps } from '../../interfaces/LoginInterface';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useNavigate } from 'react-router-dom';
 
 const CssTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
@@ -25,7 +26,7 @@ const CssTextField = styled(TextField)({
   },
 });
 
-const keys_for_register = ['ASDF','FC02', 'FCX22', 'FCV22'];
+const keys_for_register = ['ASDF', 'FC02', 'FCX22', 'FCV22'];
 
 interface Props {
   login: () => void;
@@ -33,7 +34,8 @@ interface Props {
 
 export const Form = ({ login }: Props) => {
   const [viewPassword, setViewPassword] = useState<boolean>(false);
-  const [viewConfirmPassword, setViewConfirmPassword] = useState<boolean>(false);
+  const [viewConfirmPassword, setViewConfirmPassword] =
+    useState<boolean>(false);
   const [codeEntered, setCodeEntered] = useState<string>('');
   const [pageType, setPageType] = useState('login');
   const [open, setOpen] = useState(false);
@@ -41,6 +43,7 @@ export const Form = ({ login }: Props) => {
   const isLogin = pageType === 'login';
   const isRegister = pageType === 'register';
   const isNonMobile = useMediaQuery('(min-width:600px)');
+  const navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -52,13 +55,15 @@ export const Form = ({ login }: Props) => {
     setCodeEntered('');
   };
 
+
+
   const changeForm = () => {
     if (pageType === 'login') {
       if (keys_for_register.includes(codeEntered)) {
         setPageType('register');
         setErrorCode(false);
         setCodeEntered('');
-        setViewPassword(false)
+        setViewPassword(false);
         handleClose();
       } else {
         setPageType('login');
@@ -77,7 +82,7 @@ export const Form = ({ login }: Props) => {
     handleSubmit,
     formState: { errors },
     reset,
-    watch
+    watch,
   } = useForm<LoginProps>();
 
   const onFormSubmit = (data: LoginProps) => {
@@ -85,7 +90,7 @@ export const Form = ({ login }: Props) => {
     // login();
   };
 
-  const password = watch('password')
+  const password = watch('password');
 
   return (
     <>
@@ -152,9 +157,7 @@ export const Form = ({ login }: Props) => {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton
-                    onClick={() => setViewPassword(!viewPassword)}
-                  >
+                  <IconButton onClick={() => setViewPassword(!viewPassword)}>
                     {viewPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -166,15 +169,15 @@ export const Form = ({ login }: Props) => {
             <CssTextField
               label="Repita su contraseña"
               sx={{ gridColumn: 'span 4' }}
-              onPaste={(e)=>{
-                e.preventDefault()
+              onPaste={(e) => {
+                e.preventDefault();
                 return false;
               }}
               required
               {...register('register.repeatPassword', {
                 required: 'Este campo es obligatorio',
                 validate: (value) =>
-                    value === password || "Las contraseñas no coinciden",
+                  value === password || 'Las contraseñas no coinciden',
               })}
               error={!!errors.register?.repeatPassword}
               helperText={errors.register?.repeatPassword?.message}
@@ -231,11 +234,11 @@ export const Form = ({ login }: Props) => {
             component="span"
           >
             {isLogin ? (
-              <p>
+              <p style={{ color: 'black' }}>
                 <b>Regístrarse</b>{' '}
               </p>
             ) : (
-              <p>
+              <p style={{ color: 'black' }}>
                 <b>Iniciar Sesión</b>{' '}
               </p>
             )}

@@ -9,9 +9,12 @@ import InfoIcon from '@mui/icons-material/Info';
 interface Props {
   open: boolean;
   handleClose: () => void;
+  signOut: () => void
 }
 
-export const AlertDialog = ({ handleClose, open }: Props) => {
+
+export const AlertDialog = ({ handleClose, open, signOut }: Props) => {
+
   return (
     <div>
       <Dialog
@@ -39,7 +42,7 @@ export const AlertDialog = ({ handleClose, open }: Props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Aceptar</Button>
+          <Button onClick={signOut}>Aceptar</Button>
           <Button onClick={handleClose} autoFocus>
             Cancelar
           </Button>

@@ -8,10 +8,22 @@ import {
   Button,
   Typography,
   Box,
+  IconButton,
 } from '@mui/material';
-import Person2Icon from '@mui/icons-material/Person2';
-import EditIcon from '@mui/icons-material/Edit';
 import { useState } from 'react';
+import EditIcon from '@mui/icons-material/Edit';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import styled from '@emotion/styled';
+
+
+const CssTextField = styled(TextField)({
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderRadius: '1.2rem',
+    },
+    borderRadius: '1.2rem',
+  },
+});
 
 interface Props {
   open: boolean;
@@ -23,34 +35,44 @@ export const UserProfileDialog = ({ handleClose, open }: Props) => {
 
   return (
     <>
-      <Dialog maxWidth="xs" open={open} onClose={handleClose}>
+      <Dialog maxWidth="xs" open={open}>
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
           }}
         >
-          {/* <Person2Icon /> */}
-          <DialogTitle fontSize={20} fontWeight="bold">
+          {!openInputs && (
+            <IconButton
+              onClick={handleClose}
+              sx={{
+                position: 'absolute',
+                left: 270,
+              }}
+            >
+              <CloseRoundedIcon />
+            </IconButton>
+          )}
+          <DialogTitle fontSize={20} fontWeight="bold" >
             {openInputs ? 'Cambiar la contraseña' : 'Datos de usuario'}
           </DialogTitle>
         </Box>
         <DialogContent>
           {openInputs ? (
             <Box>
-              <TextField
+              <CssTextField
                 label="Contraseña actual"
                 style={{ marginBottom: 10 }}
                 type="password"
                 required
               />
-              <TextField
+              <CssTextField
                 label="Contraseña nueva"
                 style={{ marginBottom: 10 }}
                 type="password"
                 required
               />
-              <TextField
+              <CssTextField
                 label="Repita contraseña"
                 type="password"
                 required
