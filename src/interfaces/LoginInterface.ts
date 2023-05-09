@@ -10,7 +10,12 @@ interface RegisterProps {
   repeatPassword: string;
 }
 
-
 export interface FormTypeProps {
-  formtype: 'login' | 'register'
+  formtype: 'login' | 'register';
+}
+
+export interface ChangePasswordProps {
+  password: string;
+  newPassword: string;
+  repeatPassword: string;
 }
