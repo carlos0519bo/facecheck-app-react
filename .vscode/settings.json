@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/27c4c149-353f-44e7-a7ba-0021b0e56435/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/facecheck-react-app",
+    "appService.deploySubpath": "."
+}

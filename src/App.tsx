@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { HomePage, AuthPage, NotFoundPage, PresentationPage } from './pages';
+import { HomePage, AuthPage, NotFoundPage } from './pages';
 import { lightTheme } from './themes';
 
 function App() {
@@ -10,8 +10,7 @@ function App() {
         <CssBaseline />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<PresentationPage />} />
-            {/* <Route path="/" element={<HomePage />} /> */}
+            <Route path="/" element={<HomePage />} />
             <Route path="/auth" element={<AuthPage />} />
             {/* <Route
               path="/"
